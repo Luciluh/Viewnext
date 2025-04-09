@@ -1,0 +1,221 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <style type="text/css" id="operaUserStyle"></style>
+</head>
+<body>
+    <nav id="navbar">
+        <header>Documentación de JS</header>
+        <ul>
+            <li><a class="nav-link" href="#Introduccion">Introduccion</a></li>
+            <li><a class="nav-link" href="#Lo_que_deberias_saber">Lo que deberias saber</a></li>
+            <li><a class="nav-link" href="#JavaScript_y_Java">JavaScript y Java</a></li>
+            <li><a class="nav-link" href="#Hola_mundo">Hola mundo</a></li>
+            <li><a class="nav-link" href="#Variables">Variables</a></li>
+            <li><a class="nav-link" href="#Declaracion_de_variables">Declaracion de variables</a></li>
+            <li><a class="nav-link" href="#Alcance_de_las_variables">Alcance de las variables</a></li>
+            <li><a class="nav-link" href="#Variables_globales">Variables globales</a></li>
+            <li><a class="nav-link" href="#Constantes">Constantes</a></li>
+            <li><a class="nav-link" href="#Tipos_de_datos">Tipos de datos</a></li>
+            <li><a class="nav-link" href="#Sentencia_if_else">Sentencia if else</a></li>
+            <li><a class="nav-link" href="#Sentencia_while">Sentencia while</a></li>
+            <li><a class="nav-link" href="#Declaracion_de_funciones">Declaracion de funciones</a></li>
+            <li><a class="nav-link" href="#Referencia">Referencia</a></li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="Introduccion">
+            <header>Introduccion</header>
+            <article>
+                <p>
+                    JavaScript es un lenguaje de scripting orientado a objetos y multiplataforma.
+                    Es un lenguaje pequeño y ligero. Dentro de un entorno anfitrión
+                    (por ejemplo, un navegador web), JavaScript puede conectarse a los
+                    objetos de su entorno para proporcionar control programático sobre ellos.
+                </p>
+                <p>
+                    JavaScript contiene una biblioteca estándar de objetos, como Array,
+                    Date y Math, y un conjunto básico de elementos del lenguaje como
+                    operadores, estructuras de control y declaraciones. JavaScript básico puede
+                    extenderse para una variedad de propósitos suplementándolo con
+                    objetos adicionales; por ejemplo:
+                </p>
+                <ul>
+                    <li>
+                        JavaScript del lado del cliente extiende el lenguaje básico proporcionando
+                        objetos para controlar un navegador y su Modelo de Objeto de Documento (DOM).
+                    </li>
+                    <li>
+                        JavaScript del lado del servidor extiende el lenguaje básico proporcionando
+                        objetos relevantes para ejecutar JavaScript en un servidor.
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <section class="main-section" id="Lo_que_deberias_saber">
+            <header>Lo que deberias saber</header>
+            <article>
+                <p>Esta guía asume que tienes el siguiente conocimiento básico:</p>
+                <ul>
+                    <li>
+                        Una comprensión general de Internet y la World Wide Web (WWW).
+                    </li>
+                    <li>Buen conocimiento práctico de HyperText Markup Language (HTML).</li>
+                    <li>
+                        Algo de experiencia en programación. Si eres nuevo en la programación, prueba
+                        uno de los tutoriales enlazados en la página principal sobre JavaScript.
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <section class="main-section" id="JavaScript_y_Java">
+            <header>JavaScript y Java</header>
+            <article>
+                <p>
+                    JavaScript y Java son similares en algunos aspectos pero fundamentalmente
+                    diferentes en otros. El lenguaje JavaScript se asemeja a Java pero
+                    no tiene la tipificación estática y la verificación de tipos estricta de Java.
+                </p>
+                <p>
+                    En contraste con el sistema de clases de tiempo de compilación de Java
+                    construido por declaraciones, JavaScript soporta un sistema de tiempo de ejecución basado en un pequeño
+                    número de tipos de datos que representan valores numéricos, booleanos y de cadena.
+                </p>
+            </article>
+        </section>
+        <section class="main-section" id="Hola_mundo">
+            <header>Hola mundo</header>
+            <article>
+                Para comenzar a escribir JavaScript, abre el Scratchpad y escribe
+                tu primer código JavaScript "Hola mundo":
+                <code>function greetMe(yourName) { alert("Hola " + yourName); }</code>
+                <code>greetMe("Mundo");</code>
+                ¡Selecciona el código en el pad y presiona Ctrl+R para verlo desplegarse en tu
+                navegador!
+            </article>
+        </section>
+        <section class="main-section" id="Variables">
+            <header>Variables</header>
+            <p>
+                Usas variables como nombres simbólicos para valores en tu aplicación.
+                Los nombres de las variables, llamados identificadores, cumplen con ciertas reglas.
+            </p>
+        </section>
+        <section class="main-section" id="Declaracion_de_variables">
+            <header>Declaracion de variables</header>
+            <article>
+                Puedes declarar una variable de tres maneras:
+                <p>
+                    Con la palabra clave var. Por ejemplo, <code>var x = 42;</code> Esta
+                    sintaxis puede usarse para declarar variables locales y globales.
+                </p>
+                <p>
+                    Simplemente asignándole un valor. Por ejemplo,
+                    <code>x = 42;</code> Esto siempre declara una variable global.
+                </p>
+                <p>
+                    Con la palabra clave let. Por ejemplo,<code> let y = 13;</code> Esta
+                    sintaxis puede usarse para declarar una variable local de alcance de bloque.
+                </p>
+            </article>
+        </section>
+        <section class="main-section" id="Alcance_de_las_variables">
+            <header>Alcance de las variables</header>
+            <article>
+                <p>
+                    Cuando declaras una variable fuera de cualquier función, se llama
+                    una variable global, porque está disponible para cualquier otro código en el
+                    documento actual. Cuando declaras una variable dentro de una función, se
+                    llama una variable local, porque está disponible solo dentro de esa
+                    función.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Variables_globales">
+            <header>Variables globales</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Constantes">
+            <header>Constantes</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Tipos_de_datos">
+            <header>Tipos de datos</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Sentencia_if_else">
+            <header>Sentencia if else</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Sentencia_while">
+            <header>Sentencia while</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Declaracion_de_funciones">
+            <header>Declaracion de funciones</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="Referencia">
+            <header>Referencia</header>
+            <article>
+                <p>
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,
+                    Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno,Relleno,relleno.
+                </p>
+            </article>
+        </section>
+
+    </main>
+</body>
+</html>

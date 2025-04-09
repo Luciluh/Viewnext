@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form method=" " action=" "></form>
+<!-- 
+    El method puede ser bien “POST” si se envia los datos sin ser visibles para el usuario o bien “GET” que se envia los datos a una cabecera siendo visible para el usuario
+
+    El action es la URL o ruta donde se envia el formulario -->
+
+        <input type=" " name =" ">
+        <!-- type puede ser url, email, number, color, date, time, tel, range, search, datatime, week y month -->
+
+
+            <!-- ATRIBUTOS DENTRO DEL INPUT -->
+           <input type=" " name =" " required>  <!-- indica que este elemento sera obligatorio, sin este campo relleno no se podra enviar el formulario -->
+           <input type=" " name =" " placeholder= " palabra">  <!-- pone detras del campo una palabra -->
+           <input type=" " name =" " autofocus="true">  <!-- elemento booleano que permite poner el foco, solo se permite uno en el documento ?¿¿¿¿¿ -->
+           <input type=" " name =" " autocomplete="on">  <!-- permite valores de on/off  ¿???????-->
+           <input type=" " name =" " min="" max="">  <!-- establecer minimos y maximos -->
+           <input type=" " name =" " step="4">  <!-- establece que los valores peritidos solo seran los multiplos de 4 -->
+           <input type=" " name =" " datalist> 
+           
+    
+           <!--Para que los tipo radio no se puedan seleccionar varios a la vez le pondremo el mismo name="xxxx" a todos 
+           los radios-->
+
+
+           <!-- OTROS ELEMENTOS  -->
+           <p>Estado: <progress value ="55" max="100"></progress></p>  <!--esto mostrara una barrita con el progrso por ejemplo de descarga. Sino existe el value la barrita se movera todo el rato -->
+           <!-- tambien esta el elemento <meter value=""></meter> que es muy parecido que el <progress></progress> pero se le indicara valores optimos por lo que cuando le demos un value pondra 
+           el color de la barra en funcion del valor -->
+
+           <output></output> <!-- visualizar el resultado de una operacion matematica -->
+
+           <button type="submit"> Submit</button> <!--para asegurarnos que el boton envie  el form-->
+
+</body>
+</html>
