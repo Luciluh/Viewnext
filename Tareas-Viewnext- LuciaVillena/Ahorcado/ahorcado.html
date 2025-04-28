@@ -1,0 +1,117 @@
+<!-- 
+  Autora: Lucia Villena Martin (1ºDAW) Alan Turing
+  Fecha: 24/04/2025
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego del Ahorcado</title>
+</head>
+<body>
+
+  <!-- titulo del juego -->
+  <h1>🎮 Juego del Ahorcado</h1>
+
+  <!-- donde se va a ver la palabra, intentos y puntos -->
+  <pre id="estado"></pre>
+
+  <!-- input para poner una letra -->
+  <input type="text" id="letra" maxlength="1" placeholder="Introduce una letra" autofocus>
+
+  <!-- boton para probar si la letra esta bien -->
+  <button onclick="jugarTurno()">Probar letra</button>
+
+  <!-- mensajes tipo si has acertao o no -->
+  <p id="mensaje"></p>
+
+  <!-- script con el juego -->
+  <script>
+    // cosas globales del juego
+    let palabra = "";               // palabra q hay q adivinar
+    let letrasAdivinadas = [];     // letras q ya se han acertado
+    let intentosMax = 0;           // intentos q puedes usar
+    let intentos = 0;              // los q llevas
+    let puntos = 0;                // puntos ganados
+
+    // empieza el juego desde cero
+    async function iniciarJuego() {
+      // pedimos una palabra random a la api
+      const res = await fetch('https://random-word-api.herokuapp.com/word?number=1');
+      const data = await res.json();
+      palabra = data[0].toLowerCase();  // nos quedamos la palabra en minus
+
+      // reiniciar todo
+      letrasAdivinadas = [];
+      intentosMax = Math.ceil(palabra.length * 1.5); // calculo de intentos segun largo de la palabra
+      intentos = 0;
+      puntos = 0;
+
+      actualizarEstado(); // se pinta el estado inicial
+    }
+
+    // oculta las letras con guiones bajos si no las has adivinado
+    function ocultarPalabra() {
+      return palabra
+        .split("") // separa letras
+        .map(l => letrasAdivinadas.includes(l) ? l : "_") // muestra si esta acertada o guion
+        .join(" "); // vuelve a juntar
+    }
+
+    // actualiza lo que se ve en pantalla del estado actual
+    function actualizarEstado() {
+      document.getElementById("estado").textContent =
+        `Palabra: ${ocultarPalabra()}\nIntentos: ${intentos}/${intentosMax}\nPuntos: ${puntos}`;
+    }
+
+    // cuando el jugador pone una letra
+    function jugarTurno() {
+      const input = document.getElementById("letra");
+      const letra = input.value.toLowerCase(); // lo pasamos a minus
+      input.value = ""; // se limpia el input
+
+      // si no es una letra valida
+      if (!letra.match(/[a-zñ]/i) || letra.length !== 1) {
+        document.getElementById("mensaje").textContent = "Pon una letra valida";
+        return;
+      }
+
+      // si ya habias probado esa letra
+      if (letrasAdivinadas.includes(letra)) {
+        document.getElementById("mensaje").textContent = "Ya has usado esa letra";
+        return;
+      }
+
+      // guardamos la letra jugada
+      letrasAdivinadas.push(letra);
+
+      // si la letra esta en la palabra
+      if (palabra.includes(letra)) {
+        puntos++;
+        document.getElementById("mensaje").textContent = "✅ Letra buena!";
+      } else {
+        puntos = Math.max(0, puntos - 1); // restamos punto pero no puede bajar de 0
+        intentos++;
+        document.getElementById("mensaje").textContent = "❌ Letra mala";
+      }
+
+      actualizarEstado();
+
+      // si ya has adivinado toda la palabra
+      if (!ocultarPalabra().includes("_")) {
+        document.getElementById("mensaje").textContent = `🎉 Ganaste! La palabra era "${palabra}"`;
+        document.getElementById("letra").disabled = true;
+      }
+      // si te has quedao sin intentos
+      else if (intentos >= intentosMax) {
+        document.getElementById("mensaje").textContent = `💀 Perdiste. La palabra era "${palabra}"`;
+        document.getElementById("letra").disabled = true;
+      }
+    }
+
+    // al cargar la pagina empieza el juego
+    iniciarJuego();
+  </script>
+</body>
+</html>

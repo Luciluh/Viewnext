@@ -1,0 +1,247 @@
+<!-- 
+  Autora: Lucia Villena Martin (1ºDAW) Alan Turing
+  Fecha: 25/04/2025
+
+  Este código crea una sopa de letras interactiva en la que el usuario puede buscar palabras. 
+  Las palabras se colocan aleatoriamente en la cuadrícula y el usuario puede introducir palabras para intentar encontrarlas.
+  Si la palabra está en la sopa, se marca como encontrada y se suman puntos. 
+  Si no está, se resta un punto y se añade a la lista de errores. -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sopa de Letras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    #sopa {
+      display: inline-grid;
+      grid-template-columns: repeat(20, 30px);
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    .letra {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ccc;
+      font-weight: bold;
+      background-color: white;
+    }
+
+    .letra.encontrada {
+      color: green;
+      font-weight: normal;
+    }
+
+    .input-container {
+      margin-top: 20px;
+    }
+
+    input {
+      padding: 8px;
+      width: 250px;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin-left: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sopa de Letras</h1>
+  <p>Palabras a encontrar: <span id="lista-palabras"></span></p>
+  <div id="sopa"></div>
+
+  <div class="input-container">
+    <input type="text" id="entrada" placeholder="Introduce una palabra..." />
+    <button onclick="verificarPalabra()">Buscar</button>
+  </div>
+
+  <div id="info">
+    <p>Puntos: <span id="marcador">0</span></p>
+    <p>Fallos: <span id="errores"></span></p>
+  </div>
+
+  <script>
+    const SIZE = 20;
+    const WORDS = ["JAVASCRIPT", "NODE", "CODIGO", "VARIABLE", "FUNCION", "OBJETO", "BUCLE", "ARRAY", "SINTAXIS", "CONSOLA"];
+    let sopa = Array.from({ length: SIZE }, () =>
+      Array.from({ length: SIZE }, () => "")
+    );
+
+    let marcador = 0;
+    let errores = [];
+
+    function randomChar() {
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      return letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    // mete las palabras en la sopa en pos aleatorias
+    function colocarPalabras() {
+      for (const word of WORDS) {
+        let colocada = false;
+        let intentos = 0;
+        while (!colocada && intentos < 100) {
+          intentos++;
+          const horizontal = Math.random() < 0.5;
+          const row = Math.floor(Math.random() * (horizontal ? SIZE : SIZE - word.length));
+          const col = Math.floor(Math.random() * (horizontal ? SIZE - word.length : SIZE));
+
+          let puedeColocar = true;
+          for (let i = 0; i < word.length; i++) {
+            const r = horizontal ? row : row + i;
+            const c = horizontal ? col + i : col;
+            if (sopa[r][c] !== "" && sopa[r][c] !== word[i]) {
+              puedeColocar = false;
+              break;
+            }
+          }
+
+          if (puedeColocar) {
+            for (let i = 0; i < word.length; i++) {
+              const r = horizontal ? row : row + i;
+              const c = horizontal ? col + i : col;
+              sopa[r][c] = word[i];
+            }
+            colocada = true;
+          }
+        }
+      }
+    }
+
+    // rellena los huecos vacios con letras random
+    function rellenarHuecos() {
+      for (let i = 0; i < SIZE; i++) {
+        for (let j = 0; j < SIZE; j++) {
+          if (sopa[i][j] === "") {
+            sopa[i][j] = randomChar();
+          }
+        }
+      }
+    }
+
+    // pinta la sopa de letras en pantalla
+    function mostrarSopa() {
+      const contenedor = document.getElementById("sopa");
+      contenedor.innerHTML = "";
+      for (let i = 0; i < SIZE; i++) {
+        for (let j = 0; j < SIZE; j++) {
+          const celda = document.createElement("div");
+          celda.classList.add("letra");
+          if (sopa[i][j] === sopa[i][j].toLowerCase()) {
+            celda.classList.add("encontrada");
+          }
+          celda.textContent = sopa[i][j].toUpperCase();
+          contenedor.appendChild(celda);
+        }
+      }
+      document.getElementById("marcador").textContent = marcador;
+      document.getElementById("errores").textContent = errores.join(", ");
+      document.getElementById("lista-palabras").textContent = WORDS.join(", ");
+    }
+
+    // busca la palabra en todas las direcciones
+    function buscarPalabra(palabra) {
+      palabra = palabra.toUpperCase();
+
+      // horizontal
+      for (let i = 0; i < SIZE; i++) {
+        let fila = sopa[i].join("");
+        if (fila.includes(palabra)) {
+          let start = fila.indexOf(palabra);
+          for (let j = 0; j < palabra.length; j++) {
+            sopa[i][start + j] = sopa[i][start + j].toLowerCase();
+          }
+          return true;
+        }
+      }
+
+      // vertical
+      for (let j = 0; j < SIZE; j++) {
+        let col = "";
+        for (let i = 0; i < SIZE; i++) col += sopa[i][j];
+        if (col.includes(palabra)) {
+          let start = col.indexOf(palabra);
+          for (let i = 0; i < palabra.length; i++) {
+            sopa[start + i][j] = sopa[start + i][j].toLowerCase();
+          }
+          return true;
+        }
+      }
+
+      // diagonal ↘
+      for (let i = 0; i <= SIZE - palabra.length; i++) {
+        for (let j = 0; j <= SIZE - palabra.length; j++) {
+          let diag = "";
+          for (let k = 0; k < palabra.length; k++) {
+            diag += sopa[i + k][j + k];
+          }
+          if (diag === palabra) {
+            for (let k = 0; k < palabra.length; k++) {
+              sopa[i + k][j + k] = sopa[i + k][j + k].toLowerCase();
+            }
+            return true;
+          }
+        }
+      }
+
+      // diagonal ↙
+      for (let i = 0; i <= SIZE - palabra.length; i++) {
+        for (let j = palabra.length - 1; j < SIZE; j++) {
+          let diag = "";
+          for (let k = 0; k < palabra.length; k++) {
+            diag += sopa[i + k][j - k];
+          }
+          if (diag === palabra) {
+            for (let k = 0; k < palabra.length; k++) {
+              sopa[i + k][j - k] = sopa[i + k][j - k].toLowerCase();
+            }
+            return true;
+          }
+        }
+      }
+
+      return false;
+    }
+
+    // comprueba si la palabra esta y actualiza puntos o errores
+    function verificarPalabra() {
+      const entrada = document.getElementById("entrada");
+      const palabra = entrada.value.trim().toUpperCase();
+      entrada.value = "";
+      if (!palabra) return;
+
+      if (buscarPalabra(palabra)) {
+        marcador++;
+      } else {
+        if (!errores.includes(palabra)) errores.push(palabra);
+        marcador = Math.max(0, marcador - 1);
+      }
+
+      mostrarSopa();
+    }
+
+    // inicializa el juego
+    colocarPalabras();
+    rellenarHuecos();
+    mostrarSopa();
+  </script>
+</body>
+</html>
